@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片播放之不使用预加载</title>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<style>
+			.box{
+				text-align: center;
+			}
+			.btn{
+				height: 30px;
+				line-height: 30px;
+				border:1px solid #ccc;
+				background: #fff;
+				padding: 0 10px;
+				margin: 0 20px;
+				color: red;
+			}
+			a{
+				text-decoration: none;
+			}
+			.btn:hover{
+				background: #eee;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='box'>
+			<img src="img/img/11.jpg" alt="pic" id='img' width="900px" height="700px">
+			<p>
+				<a href="javascript:;" class="btn" data-control='prev'>上一页</a>
+				<a href="javascript:;" class="btn" data-control='nexy'>下一页</a>
+			</p>
+		</div>
+		<script>
+			var imgs=[
+				'img/img/11.jpg',
+				'img/img/12.jpg',
+				'img/img/13.jpg',
+				'img/img/14.jpeg',
+				'img/img/15.jpg',
+				'img/img/16.jpg',
+				'img/img/17.jpg',
+				'img/img/18.jpg',
+				'img/img/19.jpg'
+			];
+			var index=0;
+			var len=imgs.length;
+			$('.btn').click(function(){
+				if('prev'===$(this).data('control')){
+					index--;
+					index=Math.max(0,index);
+				}
+				else{
+					index++;
+					index=Math.min(index,len-1);
+				}
+				document.title=(index+1)+'/'+len;
+				$('#img').attr('src',imgs[index]);
+			})
+		</script>
+	</body>
+</html>

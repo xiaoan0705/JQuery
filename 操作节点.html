@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<style>
+			ul{
+				padding: 0;
+				border: solid 1px grey ;
+				width: 150px;
+				float: left;
+			}
+			ul li{
+				list-style-type: none;
+				height: 40px;
+				background: blue;
+				text-align: center;
+				margin: 10px 20px;
+				line-height: 40px;
+			}
+			button{
+				float: left;
+				margin:100px 20px;
+			}
+			.clear{
+				clear: both;
+			}
+		</style>
+		<script>
+			$(function(){
+				$('#chuchujie>a').css('font-size','18px');
+				$('#chuchujie a:nth-child(3)').css({'display':'block','width':'200px','height':'100px','border':'solid 1px red'});
+				
+				//使用原生DOM添加、插入、替换、删除节点
+				//innerHTML()、appendChild()、insertBefore（）、replaceChild（）、removeChild都是DOM的方法
+				var ul=$('#Dom_ul')[0];//转换为DOM对象
+				var li=$('#Dom_ul li')[0];
+				var count=6;
+				$('#D_add').click(function(){
+					var newLi=document.createElement('li');
+					newLi.innerHTML='list'+count;
+					ul.appendChild(newLi);
+					count++;
+				});
+				$('#D_insert').click(function(){
+					var newLi=document.createElement('li');
+					newLi.innerHTML='insertList';
+					ul.insertBefore(newLi,ul.children[2]);
+				});
+				$('#D_replace').click(function(){
+					var newLi=document.createElement('li');
+					newLi.innerHTML='replaceList';
+					ul.replaceChild(newLi,ul.children[3]);
+				});
+				$('#D_delete').click(function(){
+					ul.removeChild(ul.children[0]);
+				});
+				$('#D_clone').click(function(){
+					// true 表示深复制（复制节点及其所有子节点）， false 表示浅复制（复制节点本身，不复制子节点）
+					var deeplist=ul.cloneNode(true);
+					
+				});
+				
+				//使用JQuery操作节点
+				var J_ul=$('#jquery_ul');
+				var J_li=$('#jquery_ul li');
+				var Jnewli='<li>newlist<\/li>';
+				$('#J_add').click(function(){
+					J_ul.append(Jnewli);
+				});
+				$('#J_insert').click(function(){
+					$('#jquery_ul li:nth-child(2)').after(Jnewli);
+				});
+				$('#J_replace').click(function(){
+					$('#jquery_ul li:nth-child(2)').replace(Jnewli);
+				});
+				$('#J_delete').click(function(){
+					$('#jquery_ul li:nth-child(2)').remove();
+				});
+				$("#jquery_ul li").click(function(){ 
+			    	$(this).clone(true).appendTo("J_li");
+					
+			    }); 
+			});
+		</script>
+	</head>
+	<body>
+		<div id='chuchujie'>
+			<a>text1</a>
+			<a>text2</a>
+			<a>text3</a>
+			<a>text4</a>
+		</div>
+		<div id='D_list'>
+			<h2>DOM操作节点</h2>
+			<ul id='Dom_ul'>
+				<li>list1</li>
+				<li>list2</li>
+				<li>list3</li>
+				<li>list4</li>
+				<li>list5</li>
+			</ul>
+			<button id='D_add'>添加节点</button>
+			<button id='D_insert'>插入节点</button>
+			<button id='D_replace'>替换节点</button>
+			<button id='D_delete'>删除节点</button>
+			<button id='D_clone'>克隆</button>
+			<div class='clear'></div>
+		</div>
+		
+		<div id='Jlist'>
+			<h2>JQuery操作节点</h2>
+			<ul id='jquery_ul'>
+				<li>list1</li>
+				<li>list2</li>
+				<li>list3</li>
+				<li>list4</li>
+				<li>list5</li>
+			</ul>
+			<button id='J_add'>添加节点</button>
+			<button id='J_insert'>插入节点</button>
+			<button id='J_replace'>替换节点</button>
+			<button id='J_delete'>删除节点</button>
+		</div>
+	</body>
+</html>

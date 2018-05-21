@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title></title>
+		<script src="js/jquery-1.8.3.min.js"></script>
+	</head>
+	<body>
+		<p>history</p>
+		<div id="div"></div>
+		<script>
+			(function($,window,undefined){
+				//当前第几页
+		    var pageIndex = 0;
+		    //请求函数
+		    function makeRequest(pageIndex){
+		        var request = new XMLHttpRequest();
+		        request.onreadystatechange = stateChange;
+		        //请求传两个参数，一个是当前第几页，另一个是每页的数据条数
+		        request.open("GET", "data.json", true);
+		        
+		        request.send(null);
+		        function stateChange(){
+		            //状态码为4，表示loaded，请求完成
+		            if(this.readyState !== 4 ){
+		                return;
+		            }
+		            //请求成功
+		            if(this.status >= 200 && this.status < 300 || this.status === 304){
+		                alert('fv');
+		                document.getElementById('div').innerHTML=request.responseText;
+		                var books =JSON.parse(request.responseText);
+		               for (var i in books){  
+			                alert(books[i].book_name);  
+			            }  
+		               
+		                //renderPage(books); 
+		            }
+		        }
+		　　　　 //避免内存泄漏
+		　　　　 request = null;
+		    }
+		    makeRequest(0);
+		    
+		    function renderPage(books){
+		        var bookHtml = 
+		            "<table>" +
+		            "   <tr>" +
+		            "       <th>书名</th>" +
+		            "       <th>作者</th>" +
+		            "       <th>版本</th>" +
+		            "   </tr>";
+		        for(var i in books){
+		            bookHtml += 
+		                "<tr>" +
+		                "   <td>" + books[i].book_name + "</td>" +
+		                "   <td>" + books[i].author + "</td>" +
+		                "   <td>" + books[i].edition + "</td>" +
+		                "</tr>";
+		        }
+		        bookHtml += "</table>";
+		        bookHtml += 
+		            "<button>上一页</button>" + 
+		            "<button onclick='nextPage();'>下一页</button>";
+		        var section = document.createElement("section");
+		        section.innerHtml = bookHtml;
+		        document.getElementById("book").appendChild(section); 
+		    }
+		    
+		    function nextPage(){
+		        pageIndex++;
+		        makeRequest(pageIndex);
+		        //存放当前页面的数据
+		        window.history.pushState({page: pageIndex}, null, window.location.href); 
+		    }
+		    
+		    //如果用户点击返回或者前进按钮
+		    window.addEventListener("popstate", function(event){
+		        var page = 0;
+		        //由于第一页没有pushState，所以返回到第一页的时候是没有数据的，因此得做下判断
+		        if(event.state !== null){
+		            page = event.state.page;
+		        }
+		        makeRequest(page); 
+		        pageIndex = page;
+		    });
+			})(jQuery,window,undefined);
+			
+		</script>
+	</body>
+</html>

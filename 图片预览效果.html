@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片预览效果</title>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<style>
+			ul,li{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				list-style: none;
+				float: left;
+				display: inline;
+				margin-right: 10px;
+				border: solid 1px #aaaaaa;
+			}
+			img{
+				border: none;
+			}
+		</style>
+		<script>
+			$(function(){
+				var x=10;
+				var y=20;
+				$('a.tooltip').mouseover(function(e){
+					//创建div元素
+					var tooltip="<div id='tooltip'><img src='"+this.href+"'alt='产品预览图' width='300px' height='300px'/><\/div>";
+					$('body').append(tooltip);
+					$('#tooltip').css({
+						'top':(e.pageY+y)+'px',
+						'left':(e.pageX+x)+'px'
+						}).show('fast');
+					}).mouseout(function(){
+						$('#tooltip').remove();
+					})
+				
+			})
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li><a href="img/img/11.jpg" class="tooltip" title="忘了"><img src="img/img/11.jpg" width="300px" height="200px" alt=""/></a></li>
+			<li><a href="img/img/12.jpg" class="tooltip" title="朴海镇"><img src="img/img/12.jpg" width="300px" height="200px" alt=""/></a></li>
+			<li><a href="img/img/13.jpg" class="tooltip" title="李钟硕"><img src="img/img/13.jpg" width="300px" height="200px" alt=""/></a></li>
+			<li><a href="img/img/16.jpg" class="tooltip" title="李沁"><img src="img/img/16.jpg" width="300px" height="200px" alt=""/></a></li>
+		</ul>
+	</body>
+</html>

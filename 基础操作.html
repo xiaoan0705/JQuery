@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<style>
+			#rect{
+				width: 100px;
+				height: 100px;
+				background: red;
+	
+			}
+			#panel,#flip{
+				padding:5px;
+				text-align: center;
+				background: #e5eecc;
+				border: solid 1px #c3c3c3;
+			}
+			#panel{
+				height: 200px;
+				display: none;
+			}
+			.move{
+				background:#98bf21;
+				height:150px;
+				width:150px;
+				text-align: center;
+				line-height: 150px;
+				position:relative;
+			}
+		</style>
+		<script>
+			$(function(){
+				$('.btn').click(function(){
+					$('p').hide(1000);
+				});
+				$('.toggle').click(function(){
+					$('p').toggle(1000);
+				});
+				$('.fadeIn').click(function(){
+					$('#rect').fadeIn(1000);
+				});
+				$('.fadeOut').click(function(){
+					$('#rect').fadeOut(1000);
+				});
+				//下滑面板
+				$('#flip').click(function(){
+					$('#panel').slideToggle('slow');
+				});
+				//动画
+				$('#anmi').click(function(){
+					$('.move').animate({left:'200px',top:'200px'},'slow');
+					
+				});
+				$('#anmi1').click(function(){
+					$('.move').animate({left:'200px',height:'+=100px',width:'+=100px'});
+					$('.move').animate({fontSize:'3em'},'slow');
+				});
+				//执行多条命令
+				$('.btn4').click(function(){
+					$('#p1').css('color','red').slideUp(2000).slideDown(2000);
+				});
+				//通过 jQuery val() 方法获得输入字段的值
+				$('.show').click(function(){
+					alert("值为："+$('#test').val());
+				});
+			})
+			
+		</script>
+	</head>
+	<body>
+		<button class="btn">点button，文字消失</button>
+		<button class="toggle">toggle()方法切换 hide() 和 show() 方法</button>
+		<p>这是一个段落，点击按钮隐藏</p>
+		<button class="fadeIn">点击淡入元素</button>
+		<button class="fadeOut">点击淡出元素</button>
+		<div id="rect" ></div>
+		<br>
+		<div id="flip">点我滑动面板</div>
+		<div id="panel">Hello Xiaoan</div>
+		<br>
+		<button id="anmi">开始动画</button>
+		<button id="anmi1">变大</button>
+		<p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 
+		如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+		<div class="move">Hello</div>
+		<br>
+		<button class="btn4">点我</button>
+		<p id="p1">运行多条 jQuery 命令</p>
+		<br>
+		<p>名称：<input type="text" id="test" value="小安"/></p>
+		<button class="show">显示值</button>
+	</body>
+</html>

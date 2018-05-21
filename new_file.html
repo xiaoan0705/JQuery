@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<style>
+			#divFrame{
+				width: 300px;
+				border: solid 1px grey;
+				margin: 0 auto;
+			}
+			.clsHead{
+				width: 300px;
+				height: 30px;
+				background-color: red;
+				text-align: center;
+			}
+			.clsBot{
+				text-align: right;
+			}
+			.clsContent ul{
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.clsContent ul li{
+				width: 70px;
+				margin: 10px 0;
+				list-style: none;
+			}
+		</style>
+		<script>
+			
+			//实现经典导航栏
+			$(function(){
+				$('.clsHead').click(function(){
+					if($('.clsContent').is(':visible')){
+						$('.clsHead span img').attr('src','img/img/left.png');
+						$('.clsContent').css('display','none');
+					}
+					else{
+						$('.clsHead span img').attr('src','img/img/bottom.png');
+						$('.clsContent').css('display','block');
+					}
+				});
+				$('.clsBot>a').click(function(){
+					if($('.clsBot>a').text()=="精简显示品牌"){
+						$('ul li:gt(5):not(:last)').hide();
+						$('.clsBot>a').text('显示全部品牌');
+					}
+					else{
+						$('ul li:gt(5):not(:last)').show().addClass('GetFocus');
+						$('.clsBot>a').text('精简显示品牌');
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>		
+		<div id="divFrame">
+			<div class="clsHead">
+				<span>品牌分类<img src="img/img/bottom.png" width="20px" height="20px"/></span>
+			</div>
+					<div class="clsContent">
+						<ul>
+							<li><a href="#">佳能</a></li>
+							<li><a href="#">索尼</a></li>
+							<li><a href="#">三星</a></li>
+							<li><a href="#">奥迪</a></li>
+							<li><a href="#">宝马</a></li>
+							<li><a href="#">大众</a></li>
+							<li><a href="#">现代</a></li>
+							<li><a href="#">雪铁龙</a></li>
+							<li><a href="#">奇瑞</a></li>
+							<li><a href="#">苹果</a></li>
+							<li><a href="#">小米</a></li>
+							<li><a href="#">oppo</a></li>
+						</ul>
+						<div class="clsBot">
+							<a href="#">精简显示品牌</a>
+							<img src="img/img/right.png" width="20px" height="20px"/>
+						</div>
+					</div>
+		</div>
+	</body>
+</html>
